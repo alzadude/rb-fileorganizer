@@ -253,8 +253,9 @@ class MusicFile(object):
         else:
             if os.path.isfile(destin):
                 # Copy the existing file to a backup dir
-                backupdir = (((self.rbfo.configurator.get_val('locations'))[0]
-                              + '/backup/').replace('file:///', '/'))
+                backuploc = tools.library_location(self, self.rbfo.configurator.get_val('locations'))
+                backupdir = (url2pathname(backuploc)
+                              + '/backup/').replace('file:///', '/')
                 backup = os.path.join(backupdir, os.path.basename(destin))
                 if os.path.isfile(backup):
                     counter = 0
