@@ -194,7 +194,7 @@ class MusicFile(object):
         targetdir = '/' + self.rbfo.configurator.get_val('layout-path')
         targetdir = tools.data_filler(self, targetdir,
                                       strip_ntfs=self.strip_ntfs)
-        targetloc = self.rbfo.configurator.get_val('locations')[0]
+        targetloc = tools.library_location(self, self.rbfo.configurator.get_val('locations'))
         targetpath = url2pathname(targetloc).replace('file:///', '/')
         targetdir = tools.folderize(targetpath, targetdir)
         # Set Destination  Filename

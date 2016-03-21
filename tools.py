@@ -17,6 +17,16 @@ import subprocess
 import fileops
 
 
+# Returns the library location for a file,
+# or the default location if the file is not inside any library location
+# Throws an error if there are no file:// locations in the library
+def library_location(files, library_locations):
+    file_locations = list(l for l in library_locations if l.startswith('file://'))
+    # TODO file_locations could be empty - if so, throw error here
+    return next((l for l in file_locations if files.location.startswith(l)),
+                file_locations[0])
+
+
 # Create a folder inside a library path if non-existant, and return it
 def folderize(library_path, folder):
     """ Create folders for file operations """
